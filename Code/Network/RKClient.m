@@ -148,6 +148,7 @@ NSString* RKPathAppendQueryParams(NSString* resourcePath, NSDictionary* queryPar
 	self.serviceUnavailableAlertMessage = nil;
 	self.cache = nil;
 	[_HTTPHeaders release];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	[super dealloc];
 }
