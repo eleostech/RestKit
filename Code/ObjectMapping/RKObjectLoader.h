@@ -60,7 +60,7 @@
  to extract data from the parsed payload that is not object mapped, but is interesting for one
  reason or another.
  */
-- (void)objectLoader:(RKObjectLoader*)loader willMapData:(id)mappableData;
+- (void)objectLoader:(RKObjectLoader*)loader willMapData:(inout id *)mappableData;
 
 @end
 
