@@ -84,6 +84,7 @@
     _connection = nil;
     _isLoading = NO;
     _isLoaded = NO;
+    _isCanceled = NO;
 }
 
 - (void)cleanupBackgroundTask {
@@ -191,10 +192,16 @@
 	[_connection release];
 	_connection = nil;
 	_isLoading = NO;
+    _isCanceled = YES;
     
     if (informDelegate && [_delegate respondsToSelector:@selector(requestDidCancelLoad:)]) {
         [_delegate requestDidCancelLoad:self];
     }
+    
+    // NSURLConnection is documented to not send any messages after you
+    // cancel it. We need to trigger a failure for this request
+    // in order to flush the request queue.
+    [self didFailLoadWithError:[NSError errorWithDomain:RKRestKitErrorDomain code:0 userInfo:nil]];
 }
 
 - (NSString*)HTTPMethod {
@@ -231,7 +238,7 @@
     RKLogDebug(@"Sending %@ request to URL %@. HTTP Body: %@", [self HTTPMethod], [[self URL] absoluteString], body);
     [body release];        
     
-    _isLoading = YES;    
+    _isLoading = YES;
     
     if ([self.delegate respondsToSelector:@selector(requestDidStartLoad:)]) {
         [self.delegate requestDidStartLoad:self];
@@ -447,6 +454,10 @@
 
 - (BOOL)isLoaded {
 	return _isLoaded;
+}
+
+- (BOOL)isCanceled {
+    return _isCanceled;
 }
 
 - (NSString*)resourcePath {

@@ -80,6 +80,7 @@ typedef enum RKRequestBackgroundPolicy {
 	RKRequestMethod _method;
 	BOOL _isLoading;
 	BOOL _isLoaded;
+    BOOL _isCanceled;
 	RKRequestCachePolicy _cachePolicy;
     BOOL _sentSynchronously;
     BOOL _forceBasicAuthentication;
@@ -268,6 +269,11 @@ typedef enum RKRequestBackgroundPolicy {
  * Returns YES when this request has been completed
  */
 - (BOOL)isLoaded;
+
+/**
+ * Returns YES when this request has been canceled
+ */
+- (BOOL)isCanceled;
 
 /**
  * Returns YES when the request was sent to the specified resource path

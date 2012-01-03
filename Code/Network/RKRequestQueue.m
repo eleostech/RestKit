@@ -153,7 +153,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
 
 	NSArray* requestsCopy = [NSArray arrayWithArray:_requests];
 	for (RKRequest* request in requestsCopy) {
-		if (![request isLoading] && ![request isLoaded] && self.loadingCount < _concurrentRequestsLimit) {            
+		if (![request isLoading] && ![request isLoaded] && ![request isCanceled] && self.loadingCount < _concurrentRequestsLimit) {            
             if ([_delegate respondsToSelector:@selector(requestQueue:willSendRequest:)]) {
                 [_delegate requestQueue:self willSendRequest:request];
             }
