@@ -251,6 +251,10 @@
 }
 
 - (void)didFailLoadWithError:(NSError*)error {
+    // We're telling our delegate IT'S OVER. They might release us.
+    // We need to be ready for this.
+    [self retain];
+    
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
 	if (_cachePolicy & RKRequestCachePolicyLoadOnError &&
@@ -266,8 +270,8 @@
         
         [self finalizeLoad:NO];
     }
-    
     [pool release];
+    [self release];
 }
 
 // NOTE: We do NOT call super here. We are overloading the default behavior from RKRequest
