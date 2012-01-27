@@ -161,6 +161,12 @@ typedef enum RKRequestBackgroundPolicy {
 @property(nonatomic, readonly) NSMutableURLRequest* URLRequest;
 
 /**
+ * Whether to dispatch the request even if reachability
+ * indicates the network is down.
+ */
+@property(nonatomic, assign) BOOL alwaysDispatch;
+
+/**
  * The HTTP method as a string used for this request
  */
 @property(nonatomic, readonly) NSString* HTTPMethod;

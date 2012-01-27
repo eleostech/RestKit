@@ -27,7 +27,7 @@
 
 @synthesize URL = _URL, URLRequest = _URLRequest, delegate = _delegate, additionalHTTPHeaders = _additionalHTTPHeaders,
             params = _params, userData = _userData, username = _username, password = _password, method = _method,
-            forceBasicAuthentication = _forceBasicAuthentication, cachePolicy = _cachePolicy, cache = _cache;
+            forceBasicAuthentication = _forceBasicAuthentication, cachePolicy = _cachePolicy, cache = _cache, alwaysDispatch=_alwaysDispatch;
 
 #if TARGET_OS_IPHONE
 @synthesize backgroundPolicy = _backgroundPolicy, backgroundTaskIdentifier = _backgroundTaskIdentifier;
@@ -66,6 +66,7 @@
         if (backgroundOK) {
             _backgroundTaskIdentifier = UIBackgroundTaskInvalid; 
         }
+        _alwaysDispatch = NO;
 #endif
     }
     
@@ -251,7 +252,7 @@
 }
 
 - (BOOL)shouldDispatchRequest {
-    return [RKClient sharedClient] == nil || [[RKClient sharedClient] isNetworkAvailable];
+    return self.alwaysDispatch || [RKClient sharedClient] == nil || [[RKClient sharedClient] isNetworkAvailable];
 }
 
 - (void)sendAsynchronously {
