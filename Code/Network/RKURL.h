@@ -18,4 +18,5 @@
 - (id)initWithBaseURLString:(NSString*)baseURLString resourcePath:(NSString*)resourcePath;
 + (RKURL*)URLWithBaseURLString:(NSString*)baseURLString resourcePath:(NSString*)resourcePath;
 
++ (BOOL)verifyURL:(NSString*)url;
 @end

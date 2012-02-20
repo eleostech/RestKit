@@ -17,12 +17,26 @@
 	return [[[RKURL alloc] initWithBaseURLString:baseURLString resourcePath:resourcePath] autorelease];
 }
 
++ (BOOL)verifyURL:(NSString *)url {
+    // Sorry about this, bro
+    NSURL *candidateURL = [NSURL URLWithString:url];
+    return (candidateURL && candidateURL.scheme && candidateURL.host);
+}
+
 - (id)initWithBaseURLString:(NSString*)baseURLString resourcePath:(NSString*)resourcePath {
-    self = [self initWithString:[NSString stringWithFormat:@"%@%@", baseURLString, resourcePath]];
-	if (self) {
-		_baseURLString = [baseURLString copy];
-		_resourcePath = [resourcePath copy];
-	}
+    if ([RKURL verifyURL:resourcePath]) { // resource path is a full url, so uh, treat it like one
+        self = [self initWithString:[resourcePath copy]];
+        if (self) {
+            _baseURLString = [[[[NSURL URLWithString:resourcePath] baseURL] absoluteString] copy];
+            _resourcePath = [[[NSURL URLWithString:resourcePath] path] copy];
+        }
+    } else {
+        self = [self initWithString:[NSString stringWithFormat:@"%@%@", baseURLString, resourcePath]];
+        if (self) {
+            _baseURLString = [baseURLString copy];
+            _resourcePath = [resourcePath copy];
+        }
+    }
 	return self;
 }
 
