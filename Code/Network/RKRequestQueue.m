@@ -200,6 +200,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
 }
 
 - (void)addRequest:(RKRequest*)request {
+    NSAssert(![_requests containsObject:request], @"Tried to add a request to the queue twice: %@", request);
 	[_requests addObject:request];
 	[self loadNextInQueue];
 }
@@ -225,6 +226,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
         }
 
 		[_requests removeObject:request];
+        NSAssert(self.loadingCount > 0, @"Tried to decrement the loading count erroneously.");
 		self.loadingCount = self.loadingCount - 1;
 		
 		if (loadNext) {
@@ -280,6 +282,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
         if (request != nil && [self containsRequest:request]) { 
             if ([notification.object isKindOfClass:[RKResponse class]]) {
                 [_requests removeObject:request];
+                NSAssert(self.loadingCount > 0, @"Tried to decrement the loading count erroneously.");
                 self.loadingCount = self.loadingCount - 1;
                 
                 if ([_delegate respondsToSelector:@selector(requestQueue:didLoadResponse:)]) {
@@ -289,6 +292,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
 				// Our RKRequest failed and we're notified with the original RKRequest object
             } else if ([notification.object isKindOfClass:[RKRequest class]]) {
                 [_requests removeObject:request];
+                NSAssert(self.loadingCount > 0, @"Tried to decrement the loading count erroneously.");
                 self.loadingCount = self.loadingCount - 1;
                 
                 NSDictionary* userInfo = [notification userInfo];

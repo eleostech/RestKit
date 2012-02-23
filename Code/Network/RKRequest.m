@@ -198,11 +198,6 @@
     if (informDelegate && [_delegate respondsToSelector:@selector(requestDidCancelLoad:)]) {
         [_delegate requestDidCancelLoad:self];
     }
-    
-    // NSURLConnection is documented to not send any messages after you
-    // cancel it. We need to trigger a failure for this request
-    // in order to flush the request queue.
-    [self didFailLoadWithError:[NSError errorWithDomain:RKRestKitErrorDomain code:0 userInfo:nil]];
 }
 
 - (NSString*)HTTPMethod {
