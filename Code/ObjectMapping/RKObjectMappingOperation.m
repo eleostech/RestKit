@@ -62,6 +62,7 @@
     formatter.timeZone = [NSTimeZone localTimeZone];
 	for (NSString* formatString in self.objectMapping.dateFormatStrings) {
 		[formatter setDateFormat:formatString];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
 		date = [formatter dateFromString:string];
 		if (date) {
 			break;
