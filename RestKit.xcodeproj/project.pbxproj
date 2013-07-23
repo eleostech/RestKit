@@ -2135,11 +2135,6 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				"ARCHS[sdk=macosx*]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				BUILD_STYLE = Debug;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2152,18 +2147,12 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SYMROOT = Build;
-				VALID_ARCHS = "armv6 armv7 i386 x86_64";
 			};
 			name = Debug;
 		};
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				"ARCHS[sdk=macosx*]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				BUILD_STYLE = Release;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREFIX_HEADER = Code/Support/RestKit_Prefix.pch;
@@ -2175,7 +2164,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SYMROOT = Build;
-				VALID_ARCHS = "armv6 armv7 i386 x86_64";
 			};
 			name = Release;
 		};
@@ -2239,11 +2227,6 @@
 		253216491338CA940099A5DB /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				"ARCHS[sdk=macosx*]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				BUILD_STYLE = Release;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREFIX_HEADER = Code/Support/RestKit_Prefix.pch;
@@ -2255,7 +2238,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SYMROOT = Build;
-				VALID_ARCHS = "armv6 armv7 i386 x86_64";
 			};
 			name = Distribution;
 		};
@@ -2854,11 +2836,6 @@
 		C8B69FED149BF1C900CBC8DC /* TestFlight */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				"ARCHS[sdk=macosx*]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				BUILD_STYLE = Debug;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2871,7 +2848,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SYMROOT = Build;
-				VALID_ARCHS = "armv6 armv7 i386 x86_64";
 			};
 			name = TestFlight;
 		};
